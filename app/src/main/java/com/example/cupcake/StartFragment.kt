@@ -52,10 +52,8 @@ class StartFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.apply {
-            // Set up the button click listeners
-            orderOneCupcake.setOnClickListener { orderCupcake(1) }
-            orderSixCupcakes.setOnClickListener { orderCupcake(6) }
-            orderTwelveCupcakes.setOnClickListener { orderCupcake(12) }
+            lifecycleOwner = viewLifecycleOwner
+            startFragment = this@StartFragment
         }
     }
 
@@ -63,6 +61,8 @@ class StartFragment : Fragment() {
      * Start an order with the desired quantity of cupcakes and navigate to the next screen.
      */
     fun orderCupcake(quantity: Int) {
+        sharedViewModel.setQuantity(quantity)
+
         val action = StartFragmentDirections.actionStartFragmentToFlavorFragment()
         findNavController().navigate(action)
     }

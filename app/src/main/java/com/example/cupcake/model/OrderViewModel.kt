@@ -22,4 +22,8 @@ class OrderViewModel : ViewModel() {
 
     /* ********** UI variables ********** */
 
+
+    fun setQuantity(numberOfCupcakes: Int) {
+        _quantity.value = numberOfCupcakes
+    }
 }

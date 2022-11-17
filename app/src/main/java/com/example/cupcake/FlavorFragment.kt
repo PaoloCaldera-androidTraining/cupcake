@@ -51,6 +51,9 @@ class FlavorFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.apply {
+            lifecycleOwner = viewLifecycleOwner
+            flavorFragment = this@FlavorFragment
+
             nextButton.setOnClickListener { goToNextScreen() }
         }
     }
