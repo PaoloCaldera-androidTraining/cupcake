@@ -24,6 +24,12 @@
         <variable
             name="pickupFragment"
             type="com.example.cupcake.PickupFragment" />
+        <variable
+            name="orderViewModel"
+            type="com.example.cupcake.model.OrderViewModel" />
+        <variable
+            name="pickupViewModel"
+            type="com.example.cupcake.model.PickupViewModel" />
     </data>
 
     <ScrollView
@@ -47,24 +53,36 @@
                     android:id="@+id/option0"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:checked="@{orderViewModel.date.equals(pickupViewModel.dateOptions[0])}"
+                    android:text="@{pickupViewModel.dateOptions[0]}"
+                    android:onClick="@{() -> orderViewModel.setDate(pickupViewModel.dateOptions[0])}"
                     tools:text="Thursday" />
 
                 <RadioButton
                     android:id="@+id/option1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:checked="@{orderViewModel.date.equals(pickupViewModel.dateOptions[1])}"
+                    android:text="@{pickupViewModel.dateOptions[1]}"
+                    android:onClick="@{() -> orderViewModel.setDate(pickupViewModel.dateOptions[1])}"
                     tools:text="Friday" />
 
                 <RadioButton
                     android:id="@+id/option2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:checked="@{orderViewModel.date.equals(pickupViewModel.dateOptions[2])}"
+                    android:text="@{pickupViewModel.dateOptions[2]}"
+                    android:onClick="@{() -> orderViewModel.setDate(pickupViewModel.dateOptions[2])}"
                     tools:text="Saturday" />
 
                 <RadioButton
                     android:id="@+id/option3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:checked="@{orderViewModel.date.equals(pickupViewModel.dateOptions[3])}"
+                    android:text="@{pickupViewModel.dateOptions[3]}"
+                    android:onClick="@{() -> orderViewModel.setDate(pickupViewModel.dateOptions[3])}"
                     tools:text="Sunday" />
             </RadioGroup>
 
@@ -95,6 +113,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/side_margin"
                 android:text="@string/next"
+                android:onClick="@{() -> pickupFragment.goToNextScreen()}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

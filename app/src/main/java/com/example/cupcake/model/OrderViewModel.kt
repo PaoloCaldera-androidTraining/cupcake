@@ -30,4 +30,8 @@ class OrderViewModel : ViewModel() {
     fun setFlavor(desiredFlavor: String) {
         _flavor.value = desiredFlavor
     }
+
+    fun setDate(pickupDate: String) {
+        _date.value = pickupDate
+    }
 }

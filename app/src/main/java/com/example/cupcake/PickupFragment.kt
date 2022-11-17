@@ -22,9 +22,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.cupcake.databinding.FragmentPickupBinding
 import com.example.cupcake.model.OrderViewModel
+import com.example.cupcake.model.PickupViewModel
 
 /**
  * [PickupFragment] allows the user to choose a pickup date for the cupcake order.
@@ -38,6 +40,7 @@ class PickupFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val sharedViewModel: OrderViewModel by activityViewModels()
+    private val viewModel: PickupViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,8 +56,8 @@ class PickupFragment : Fragment() {
         binding.apply {
             lifecycleOwner = viewLifecycleOwner
             pickupFragment = this@PickupFragment
-
-            nextButton.setOnClickListener { goToNextScreen() }
+            orderViewModel = sharedViewModel
+            pickupViewModel = viewModel
         }
     }
 
