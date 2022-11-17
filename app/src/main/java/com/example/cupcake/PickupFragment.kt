@@ -59,6 +59,8 @@ class PickupFragment : Fragment() {
             orderViewModel = sharedViewModel
             pickupViewModel = viewModel
         }
+
+        viewModel.dateOptions.value?.let { sharedViewModel.setDate(it.get(0)) }
     }
 
     /**

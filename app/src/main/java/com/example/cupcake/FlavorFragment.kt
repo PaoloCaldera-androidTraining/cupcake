@@ -55,6 +55,8 @@ class FlavorFragment : Fragment() {
             flavorFragment = this@FlavorFragment
             orderViewModel = sharedViewModel
         }
+
+        sharedViewModel.setFlavor(getString(R.string.vanilla))
     }
 
     /**

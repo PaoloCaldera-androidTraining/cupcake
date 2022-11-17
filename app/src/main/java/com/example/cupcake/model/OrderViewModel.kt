@@ -1,9 +1,11 @@
 package com.example.cupcake.model
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import com.example.cupcake.R
 import java.text.NumberFormat
 import java.util.*
 
@@ -27,25 +29,38 @@ class OrderViewModel : ViewModel() {
 
     /* ********** UI variables ********** */
 
+    init {
+        resetOrder()
+        Log.d(LOG_TAG, "Quantity: ${_quantity.value} || Flavor: ${_flavor.value} || " +
+                "Date: ${_date.value} || Price: {${_price.value}}")
+    }
+
 
     companion object {
         private const val PRICE_PER_CUPCAKE = 2.00
         private const val PRICE_FOR_SAME_DAY_PICKUP = 3.00
+        private const val LOG_TAG = "OrderViewModel"
     }
 
 
     fun setQuantity(numberOfCupcakes: Int) {
         _quantity.value = numberOfCupcakes
         calculatePrice()
+        Log.d(LOG_TAG, "Quantity: ${_quantity.value} || Flavor: ${_flavor.value} || " +
+                "Date: ${_date.value} || Price: ${_price.value}")
     }
 
     fun setFlavor(desiredFlavor: String) {
         _flavor.value = desiredFlavor
+        Log.d(LOG_TAG, "Quantity: ${_quantity.value} || Flavor: ${_flavor.value} || " +
+                "Date: ${_date.value} || Price: ${_price.value}")
     }
 
     fun setDate(pickupDate: String) {
         _date.value = pickupDate
         calculatePrice()
+        Log.d(LOG_TAG, "Quantity: ${_quantity.value} || Flavor: ${_flavor.value} || " +
+                "Date: ${_date.value} || Price: ${_price.value}")
     }
 
     private fun calculatePrice() {
@@ -54,5 +69,12 @@ class OrderViewModel : ViewModel() {
             tempPrice += PRICE_FOR_SAME_DAY_PICKUP
 
         _price.value = tempPrice
+    }
+
+    private fun resetOrder() {
+        _quantity.value = 0
+        _flavor.value = ""
+        _date.value = ""
+        _price.value = 0.0
     }
 }

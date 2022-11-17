@@ -15,6 +15,10 @@ class PickupViewModel : ViewModel() {
 
     /* ********** UI variables ********** */
 
+    init {
+        getPickupOptions()
+    }
+
 
     private fun getPickupOptions() {
         val options = mutableListOf<String>()
