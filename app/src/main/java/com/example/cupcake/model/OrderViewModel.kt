@@ -28,8 +28,15 @@ class OrderViewModel : ViewModel() {
     /* ********** UI variables ********** */
 
 
+    companion object {
+        private const val PRICE_PER_CUPCAKE = 2.00
+        private const val PRICE_FOR_SAME_DAY_PICKUP = 3.00
+    }
+
+
     fun setQuantity(numberOfCupcakes: Int) {
         _quantity.value = numberOfCupcakes
+        calculatePrice()
     }
 
     fun setFlavor(desiredFlavor: String) {
@@ -38,5 +45,14 @@ class OrderViewModel : ViewModel() {
 
     fun setDate(pickupDate: String) {
         _date.value = pickupDate
+        calculatePrice()
+    }
+
+    private fun calculatePrice() {
+        var tempPrice = (quantity.value ?: 0) * PRICE_PER_CUPCAKE
+        if (date.value.equals(PickupViewModel().dateOptions.value?.get(0)))
+            tempPrice += PRICE_FOR_SAME_DAY_PICKUP
+
+        _price.value = tempPrice
     }
 }
