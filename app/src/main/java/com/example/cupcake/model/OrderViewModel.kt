@@ -2,7 +2,10 @@ package com.example.cupcake.model
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import java.text.NumberFormat
+import java.util.*
 
 class OrderViewModel : ViewModel() {
 
@@ -18,7 +21,9 @@ class OrderViewModel : ViewModel() {
     val date: LiveData<String> get() = _date
 
     private val _price = MutableLiveData<Double>()
-    val price: LiveData<Double> get() = _price
+    val price: LiveData<String> get() = Transformations.map(_price) {
+        NumberFormat.getCurrencyInstance(Locale.getDefault()).format(it)
+    }
 
     /* ********** UI variables ********** */
 
