@@ -31,36 +31,27 @@ class OrderViewModel : ViewModel() {
 
     init {
         resetOrder()
-        Log.d(LOG_TAG, "Quantity: ${_quantity.value} || Flavor: ${_flavor.value} || " +
-                "Date: ${_date.value} || Price: {${_price.value}}")
     }
 
 
     companion object {
         private const val PRICE_PER_CUPCAKE = 2.00
         private const val PRICE_FOR_SAME_DAY_PICKUP = 3.00
-        private const val LOG_TAG = "OrderViewModel"
     }
 
 
     fun setQuantity(numberOfCupcakes: Int) {
         _quantity.value = numberOfCupcakes
         calculatePrice()
-        Log.d(LOG_TAG, "Quantity: ${_quantity.value} || Flavor: ${_flavor.value} || " +
-                "Date: ${_date.value} || Price: ${_price.value}")
     }
 
     fun setFlavor(desiredFlavor: String) {
         _flavor.value = desiredFlavor
-        Log.d(LOG_TAG, "Quantity: ${_quantity.value} || Flavor: ${_flavor.value} || " +
-                "Date: ${_date.value} || Price: ${_price.value}")
     }
 
     fun setDate(pickupDate: String) {
         _date.value = pickupDate
         calculatePrice()
-        Log.d(LOG_TAG, "Quantity: ${_quantity.value} || Flavor: ${_flavor.value} || " +
-                "Date: ${_date.value} || Price: ${_price.value}")
     }
 
     private fun calculatePrice() {
