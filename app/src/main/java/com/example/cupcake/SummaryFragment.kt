@@ -63,15 +63,19 @@ class SummaryFragment : Fragment() {
      * Submit the order by sharing out the order details to another app via an implicit intent.
      */
     fun sendOrder() {
-        //Toast.makeText(activity, "Send Order", Toast.LENGTH_SHORT).show()
-
+        /*  Construct the body of the email */
         val orderSummary = getString(
             R.string.order_details,
-            sharedViewModel.quantity.value.toString(),
+            resources.getQuantityString(            // command to retrieve the plural resource
+                R.plurals.number_of_cupcakes,       // id of the plural resource
+                sharedViewModel.quantity.value!!,   // quantity that evaluates which item of the plural to pick up
+                sharedViewModel.quantity.value!!    // quantity that substitutes the %d
+            ),
             sharedViewModel.flavor.value.toString(),
             sharedViewModel.date.value.toString(),
             sharedViewModel.price.value.toString()
         )
+        /*  Build the implicit intent   */
         val intent = Intent(Intent.ACTION_SEND)
             .setType("text/plain")
             .putExtra(Intent.EXTRA_SUBJECT, getString(R.string.new_cupcake_order))

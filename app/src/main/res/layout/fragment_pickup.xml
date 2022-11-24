@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
      Copyright (C) 2020 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,12 +20,15 @@
     tools:context=".PickupFragment">
 
     <data>
+
         <variable
             name="pickupFragment"
             type="com.example.cupcake.PickupFragment" />
+
         <variable
             name="orderViewModel"
             type="com.example.cupcake.model.OrderViewModel" />
+
         <variable
             name="pickupViewModel"
             type="com.example.cupcake.model.PickupViewModel" />
@@ -54,8 +56,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="@{orderViewModel.date.equals(pickupViewModel.dateOptions[0])}"
-                    android:text="@{pickupViewModel.dateOptions[0]}"
                     android:onClick="@{() -> orderViewModel.setDate(pickupViewModel.dateOptions[0])}"
+                    android:text="@{pickupViewModel.dateOptions[0]}"
                     tools:text="Thursday" />
 
                 <RadioButton
@@ -63,8 +65,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="@{orderViewModel.date.equals(pickupViewModel.dateOptions[1])}"
-                    android:text="@{pickupViewModel.dateOptions[1]}"
                     android:onClick="@{() -> orderViewModel.setDate(pickupViewModel.dateOptions[1])}"
+                    android:text="@{pickupViewModel.dateOptions[1]}"
                     tools:text="Friday" />
 
                 <RadioButton
@@ -72,8 +74,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="@{orderViewModel.date.equals(pickupViewModel.dateOptions[2])}"
-                    android:text="@{pickupViewModel.dateOptions[2]}"
                     android:onClick="@{() -> orderViewModel.setDate(pickupViewModel.dateOptions[2])}"
+                    android:text="@{pickupViewModel.dateOptions[2]}"
                     tools:text="Saturday" />
 
                 <RadioButton
@@ -81,8 +83,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="@{orderViewModel.date.equals(pickupViewModel.dateOptions[3])}"
-                    android:text="@{pickupViewModel.dateOptions[3]}"
                     android:onClick="@{() -> orderViewModel.setDate(pickupViewModel.dateOptions[3])}"
+                    android:text="@{pickupViewModel.dateOptions[3]}"
                     tools:text="Sunday" />
             </RadioGroup>
 
@@ -110,6 +112,7 @@
 
             <Button
                 android:id="@+id/cancel_button"
+                style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/margin_between_elements"
@@ -119,16 +122,15 @@
                 app:layout_constraintEnd_toStartOf="@id/next_button"
                 app:layout_constraintHorizontal_chainStyle="spread"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/next_button"
-                style="?attr/materialButtonOutlinedStyle" />
+                app:layout_constraintTop_toTopOf="@id/next_button" />
 
             <Button
                 android:id="@+id/next_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/side_margin"
-                android:text="@string/next"
                 android:onClick="@{() -> pickupFragment.goToNextScreen()}"
+                android:text="@string/next"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/cancel_button"
