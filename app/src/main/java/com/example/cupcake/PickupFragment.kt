@@ -21,7 +21,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.cupcake.databinding.FragmentPickupBinding
+import com.example.cupcake.model.OrderViewModel
+import com.example.cupcake.model.PickupViewModel
 
 /**
  * [PickupFragment] allows the user to choose a pickup date for the cupcake order.
@@ -31,30 +36,39 @@ class PickupFragment : Fragment() {
     // Binding object instance corresponding to the fragment_pickup.xml layout
     // This property is non-null between the onCreateView() and onDestroyView() lifecycle callbacks,
     // when the view hierarchy is attached to the fragment.
-    private var binding: FragmentPickupBinding? = null
+    private var _binding: FragmentPickupBinding? = null
+    private val binding get() = _binding!!
+
+    private val sharedViewModel: OrderViewModel by activityViewModels()
+    private val viewModel: PickupViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val fragmentBinding = FragmentPickupBinding.inflate(inflater, container, false)
-        binding = fragmentBinding
-        return fragmentBinding.root
+    ): View {
+        _binding = FragmentPickupBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding?.apply {
-            nextButton.setOnClickListener { goToNextScreen() }
+        binding.apply {
+            lifecycleOwner = viewLifecycleOwner
+            pickupFragment = this@PickupFragment
+            orderViewModel = sharedViewModel
+            pickupViewModel = viewModel
         }
+
+        viewModel.dateOptions.value?.let { sharedViewModel.setDate(it.get(0)) }
     }
 
     /**
      * Navigate to the next screen to see the order summary.
      */
     fun goToNextScreen() {
-        Toast.makeText(activity, "Next", Toast.LENGTH_SHORT).show()
+        val action = PickupFragmentDirections.actionPickupFragmentToSummaryFragment()
+        findNavController().navigate(action)
     }
 
     /**
@@ -63,6 +77,6 @@ class PickupFragment : Fragment() {
      */
     override fun onDestroyView() {
         super.onDestroyView()
-        binding = null
+        _binding = null
     }
 }
