@@ -68,6 +68,7 @@ class FlavorFragment : Fragment() {
     }
 
     fun cancelOrder() {
+        sharedViewModel.resetOrder()
         val action = FlavorFragmentDirections.actionFlavorFragmentToStartFragment()
         findNavController().navigate(action)
     }

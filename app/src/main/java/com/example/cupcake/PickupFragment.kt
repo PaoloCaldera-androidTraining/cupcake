@@ -72,6 +72,7 @@ class PickupFragment : Fragment() {
     }
 
     fun cancelOrder() {
+        sharedViewModel.resetOrder()
         val action = PickupFragmentDirections.actionPickupFragmentToStartFragment()
         findNavController().navigate(action)
     }

@@ -66,6 +66,7 @@ class SummaryFragment : Fragment() {
     }
 
     fun cancelOrder() {
+        sharedViewModel.resetOrder()
         val action = SummaryFragmentDirections.actionSummaryFragmentToStartFragment()
         findNavController().navigate(action)
     }
