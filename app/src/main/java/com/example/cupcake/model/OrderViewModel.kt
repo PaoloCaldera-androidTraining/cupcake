@@ -1,5 +1,6 @@
 package com.example.cupcake.model
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
@@ -36,12 +37,14 @@ class OrderViewModel : ViewModel() {
     companion object {
         private const val PRICE_PER_CUPCAKE = 2.00
         private const val PRICE_FOR_SAME_DAY_PICKUP = 3.00
+        private const val LOG_TAG = "OrderViewModel"
     }
 
 
     fun setQuantity(numberOfCupcakes: Int) {
         _quantity.value = numberOfCupcakes
         calculatePrice()
+        Log.d(LOG_TAG, price.value.toString())
     }
 
     fun setFlavor(desiredFlavor: String) {
