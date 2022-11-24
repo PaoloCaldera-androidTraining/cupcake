@@ -67,6 +67,11 @@ class FlavorFragment : Fragment() {
         findNavController().navigate(action)
     }
 
+    fun cancelOrder() {
+        val action = FlavorFragmentDirections.actionFlavorFragmentToStartFragment()
+        findNavController().navigate(action)
+    }
+
     /**
      * This fragment lifecycle method is called when the view hierarchy associated with the fragment
      * is being removed. As a result, clear out the binding object.
