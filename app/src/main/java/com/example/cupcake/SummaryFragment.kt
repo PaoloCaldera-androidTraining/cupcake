@@ -15,6 +15,7 @@
  */
 package com.example.cupcake
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -62,7 +63,32 @@ class SummaryFragment : Fragment() {
      * Submit the order by sharing out the order details to another app via an implicit intent.
      */
     fun sendOrder() {
-        Toast.makeText(activity, "Send Order", Toast.LENGTH_SHORT).show()
+        //Toast.makeText(activity, "Send Order", Toast.LENGTH_SHORT).show()
+
+        val orderSummary = getString(
+            R.string.order_details,
+            sharedViewModel.quantity.value.toString(),
+            sharedViewModel.flavor.value.toString(),
+            sharedViewModel.date.value.toString(),
+            sharedViewModel.price.value.toString()
+        )
+        val intent = Intent(Intent.ACTION_SEND)
+            .setType("text/plain")
+            .putExtra(Intent.EXTRA_SUBJECT, getString(R.string.new_cupcake_order))
+            .putExtra(Intent.EXTRA_TEXT, orderSummary)
+            .putExtra(Intent.EXTRA_EMAIL, "paolo.caldera.94@gmail.com")
+
+        /*  Before launching the intent, check if there is an app able to handle the request
+            provided through the intent. To do this, the method resolveActivity() must not return
+            a null value if there is an activity that handles the intent.
+            resolveActivity() is accessible from the PackageManager, a class having information
+            about the app packages installed on the device, which is then accessible from the
+            activity instance.
+         */
+        if (activity?.packageManager?.resolveActivity(intent, 0) != null) {
+            startActivity(intent)
+        }
+
     }
 
     fun cancelOrder() {
